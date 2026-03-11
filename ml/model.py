@@ -1,7 +1,9 @@
 import pickle
+# TODO: add necessary import
+# random forest for training, no scaling needed for tree-based models
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-# TODO: add necessary import
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -20,7 +22,10 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     # TODO: implement the function
-    pass
+    # create RFC and fit on training data, random_state so runs are reproducible
+    model = RandomForestClassifier(random_state=50)
+    model.fit(X_train, y_train)
+    return model
 
 
 def compute_model_metrics(y, preds):
@@ -60,7 +65,8 @@ def inference(model, X):
         Predictions from the model.
     """
     # TODO: implement the function
-    pass
+    # get class predictions (0 or 1) for each row
+    return model.predict(X)
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -73,12 +79,16 @@ def save_model(model, path):
         Path to save pickle file.
     """
     # TODO: implement the function
-    pass
+    # dump model or encoder to a pickle file so we can load it later
+    with open(path, 'wb') as f:
+        pickle.dump(model, f)
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     # TODO: implement the function
-    pass
+    # load the pickle file and return whatever's in it (model or encoder)
+    with open(path, 'rb') as f:
+        return pickle.load(f)
 
 
 def performance_on_categorical_slice(
@@ -118,11 +128,19 @@ def performance_on_categorical_slice(
 
     """
     # TODO: implement the function
+    # filter to rows where this column equals slice_value, process with existing encoder/lb
+    data_slice = data[data[column_name] == slice_value]
+    if len(data_slice) == 0:
+        return 0.0, 0.0, 0.0
     X_slice, y_slice, _, _ = process_data(
-        # your code here
-        # for input data, use data in column given as "column_name", with the slice_value 
-        # use training = False
+        data_slice,
+        categorical_features=categorical_features,
+        label=label,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
-    preds = None # your code here to get prediction on X_slice using the inference function
+    # run model on the slice and get precision, recall, F1
+    preds = inference(model, X_slice)
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta
