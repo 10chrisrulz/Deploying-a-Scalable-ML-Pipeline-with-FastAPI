@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -68,6 +69,7 @@ def inference(model, X):
     # get class predictions (0 or 1) for each row
     return model.predict(X)
 
+
 def save_model(model, path):
     """ Serializes model to a file.
 
@@ -82,6 +84,7 @@ def save_model(model, path):
     # dump model or encoder to a pickle file so we can load it later
     with open(path, 'wb') as f:
         pickle.dump(model, f)
+
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""

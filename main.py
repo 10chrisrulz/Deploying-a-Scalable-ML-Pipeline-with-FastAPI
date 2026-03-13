@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 from ml.data import apply_label, process_data
 from ml.model import inference, load_model
 
+
 # DO NOT MODIFY
 class Data(BaseModel):
     age: int = Field(..., example=37)
@@ -26,6 +27,7 @@ class Data(BaseModel):
     hours_per_week: int = Field(..., example=40, alias="hours-per-week")
     native_country: str = Field(..., example="United-States", alias="native-country")
 
+
 # TODO: enter the path for the saved encoder and model (same folder as this script)
 project_path = os.path.dirname(os.path.abspath(__file__))
 encoder = load_model(os.path.join(project_path, "model", "encoder.pkl"))
@@ -33,6 +35,7 @@ model = load_model(os.path.join(project_path, "model", "model.pkl"))
 
 # TODO: create a RESTful API using FastAPI
 app = FastAPI()
+
 
 # TODO: create a GET on the root giving a welcome message
 @app.get("/")

@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 # TODO: add necessary import
 from sklearn.ensemble import RandomForestClassifier
