@@ -22,7 +22,7 @@ Evaluation uses the held-out 20% test set from the same census.csv split. This s
 
 The metrics used are precision, recall, and F1 score (beta=1), computed with scikit-learn’s precision_score, recall_score, and fbeta_score with zero_division=1.  
 
-**Overall test-set performance** (representative run): Precision ≈ 0.75, Recall ≈ 0.64, F1 ≈ 0.69. Performance varies by slice - for example, slices with more data (workclass "Private", education "HS-grad") have more stable metrics, while rare slices ("Without-pay", "Preschool") can show very high or unstable precision/recall due to small sample sizes. Detailed per-slice metrics are in slice_output.txt.
+**This model’s performance on those metrics:** On the held-out test set, the model achieves approximately 0.75 precision, 0.64 recall, and 0.69 F1. Performance varies by slice - for example, slices with more data (workclass "Private", education "HS-grad") have more stable metrics, while rare slices ("Without-pay", "Preschool") can show very high or unstable precision and recall due to small sample sizes. Detailed per-slice metrics are in slice_output.txt.
 
 ## Ethical Considerations
 
