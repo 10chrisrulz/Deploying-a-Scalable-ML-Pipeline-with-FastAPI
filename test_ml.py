@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 
 from ml.data import apply_label
-from ml.model import compute_model_metrics, inference, train_model
+from ml.model import compute_model_metrics, train_model
 
 
 # TODO: implement the first test. Change the function name and input as needed
