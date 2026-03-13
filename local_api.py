@@ -2,15 +2,14 @@ import json
 
 import requests
 
+BASE_URL = "http://127.0.0.1:8000"
+
 # TODO: send a GET using the URL http://127.0.0.1:8000
-r = None # Your code here
+r = requests.get(BASE_URL)
 
-# TODO: print the status code
-# print()
-# TODO: print the welcome message
-# print()
-
-
+# TODO: print the status code and welcome message
+print(f"Status Code: {r.status_code}")
+print(f"Result: {r.json().get('message', r.text)}")
 
 data = {
     "age": 37,
@@ -29,10 +28,9 @@ data = {
     "native-country": "United-States",
 }
 
-# TODO: send a POST using the data above
-r = None # Your code here
+# TODO: send a POST using the data above (inference endpoint)
+r = requests.post(f"{BASE_URL}/data/", json=data)
 
-# TODO: print the status code
-# print()
-# TODO: print the result
-# print()
+# TODO: print the status code and result
+print(f"Status Code: {r.status_code}")
+print(f"Result: {r.json().get('result', r.text)}")
